@@ -1,20 +1,48 @@
+# My Next.js App
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Prerequisites
+
+Before you begin, make sure you have Node.js installed on your computer:
+
+1. **Install Node.js**: Download and install from [nodejs.org](https://nodejs.org/)
+
+   - Choose the LTS (Long Term Support) version
+   - This will also install npm (Node Package Manager)
+
+2. **Verify installation**: Open your terminal/command prompt and run:
+   ```bash
+   node --version
+   npm --version
+   ```
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone [your-repo-url-here]
+cd [your-project-name]
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+This downloads all the required packages for the project.
+
+### 3. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. View Your App
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
