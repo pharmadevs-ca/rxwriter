@@ -22,8 +22,8 @@ Before you begin, make sure you have Node.js installed on your computer:
 ### 1. Clone the Repository
 
 ```bash
-git clone [your-repo-url-here]
-cd [your-project-name]
+git clone https://github.com/pharmadevs-ca/rxwriter
+cd rxwriter
 ```
 
 ### 2. Install Dependencies
