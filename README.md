@@ -19,7 +19,9 @@ Before you begin, make sure you have Node.js installed on your computer:
 
 ## Getting Started
 
-### 1. Clone the Repository
+Type these commands into the Terminal of your code editor like VS Code
+
+### 1. Clone the Repository 
 
 ```bash
 git clone https://github.com/pharmadevs-ca/rxwriter
