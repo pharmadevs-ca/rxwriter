@@ -30,8 +30,8 @@ export default function RootLayout({ children }) {
             component='main'
             sx={{
               p: 3,
-              ml: '240px',
               display: 'flex',
+              flexGrow: 1,
               justifyContent: 'center',
               alignItems: 'center',
               minHeight: '100vh',
