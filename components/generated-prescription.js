@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@/components/ui/button";
+'use client'
+import { Button } from '@mui/material'
 
 export default function GeneratedPrescription(props) {
   return (
@@ -11,5 +11,5 @@ export default function GeneratedPrescription(props) {
 
       <Button>Print</Button>
     </div>
-  );
+  )
 }

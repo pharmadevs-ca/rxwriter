@@ -1,13 +1,13 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import PrescriptionInputs from "@/components/prescription-inputs";
-import GeneratedPrescription from "@/components/generated-prescription";
+'use client'
+import { useEffect, useState } from 'react'
+import { Button } from '@mui/material'
+import PrescriptionInputs from '@/components/prescription-inputs'
+import GeneratedPrescription from '@/components/generated-prescription'
 
 export default function Home() {
-  const [prescriptionData, setPrescriptionData] = useState();
+  const [prescriptionData, setPrescriptionData] = useState()
   const [showGeneratedPrescription, setShowGeneratedPrescription] =
-    useState(false);
+    useState(false)
 
   return (
     <div>
@@ -20,9 +20,9 @@ export default function Home() {
 
       <Button
         onClick={() => {
-          setShowGeneratedPrescription(!showGeneratedPrescription);
+          setShowGeneratedPrescription(!showGeneratedPrescription)
         }}
-        variant="secondary"
+        variant='secondary'
       >
         Generate Prescription
       </Button>
@@ -31,5 +31,5 @@ export default function Home() {
 
       {showGeneratedPrescription && <GeneratedPrescription />}
     </div>
-  );
+  )
 }
