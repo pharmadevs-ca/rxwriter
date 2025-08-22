@@ -125,3 +125,84 @@ import { Button } from '@mui/material'
 - **Consistent**: All components follow Material Design standards
 - **Maintained**: Material-UI is actively developed by Google
 - **Accessible**: Built-in accessibility features
+
+## 📋 Pull Request Review Guide
+
+### For Reviewers: How to Test This Branch
+
+If you're reviewing this pull request, here's how to pull and test the changes:
+
+#### Step 1: Pull the Branch
+
+```bash
+# Make sure you're in the project directory
+cd your-project-name
+
+# Fetch the latest changes
+git fetch origin
+
+# Switch to the branch
+git checkout rxwri-15
+
+# Install the new dependencies (REQUIRED!)
+npm install
+```
+
+#### Step 2: Start the Development Server
+
+```bash
+npm run dev
+```
+
+#### Step 3: What to Test
+
+**✅ Visual Check:**
+
+- Open `http://localhost:3000`
+- You should see a sidebar on the left with menu items
+- Main content should be centered in the remaining space
+- No console errors in browser dev tools
+
+**✅ Functionality Check:**
+
+- Click the "Generate Prescription" button - it should work
+- Sidebar should always be visible (doesn't hide/collapse)
+- Page content should be centered horizontally and vertically
+
+**✅ Code Check:**
+
+- No import errors when starting the app
+- All Material-UI components load properly
+- No references to old shadcn components
+
+#### Step 4: Common Issues & Solutions
+
+**Problem:** `Module not found` errors
+**Solution:** Make sure you ran `npm install` after checking out the branch
+
+**Problem:** Sidebar not showing
+**Solution:** Check browser console for errors, ensure all MUI packages installed
+
+**Problem:** Content not centered
+**Solution:** This is expected behavior - content centers within the available space after the sidebar
+
+#### Step 5: Going Back to Main Branch
+
+```bash
+# Switch back to main branch
+git checkout main
+
+# Reinstall original dependencies
+npm install
+```
+
+### Review Checklist
+
+- [ ] Branch pulls without conflicts
+- [ ] `npm install` runs successfully
+- [ ] App starts without errors (`npm run dev`)
+- [ ] Sidebar appears on the left side
+- [ ] Main content is centered
+- [ ] Buttons work (Material-UI styling)
+- [ ] No console errors in browser
+- [ ] Code follows project conventions
