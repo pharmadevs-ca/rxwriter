@@ -90,7 +90,7 @@ import { Button } from '@mui/material'
 
 - `app/layout.js` - Added sidebar and centered layout
 - `app/page.js` - Updated button import
-- `components/mui-sidebar.js` - New sidebar component
+- `components/mui-sidebar.js` - New sidebar component from https://mui.com/material-ui/react-drawer/#permanent-drawer
 - `components/generated-prescription.js` - Updated button import
 
 ### Key Code Changes
