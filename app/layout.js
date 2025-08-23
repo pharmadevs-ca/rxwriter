@@ -32,8 +32,8 @@ export default function RootLayout({ children }) {
               p: 3,
               display: 'flex',
               flexGrow: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
+              justifyContent: 'left',
+              alignItems: 'left',
               minHeight: '100vh',
             }}
           >

@@ -7,9 +7,13 @@ export default function GeneratedPrescription(props) {
       <h1>Generated Prescription</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
       </p>
 
-      <Button>Print</Button>
+      <Button variant='contained'>Print</Button>
     </div>
   )
 }
