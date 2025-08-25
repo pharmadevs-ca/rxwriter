@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from 'next/font/google'
+import { Box } from '@mui/material'
+import MuiSidebar from '@/components/mui-sidebar'
 import './globals.css'
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { AppSidebar } from '@/components/app-sidebar'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,13 +24,22 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SidebarProvider>
-          <AppSidebar />
-          <main>
-            <SidebarTrigger />
+        <Box sx={{ display: 'flex' }}>
+          <MuiSidebar />
+          <Box
+            component='main'
+            sx={{
+              p: 3,
+              display: 'flex',
+              flexGrow: 1,
+              justifyContent: 'left',
+              alignItems: 'left',
+              minHeight: '100vh',
+            }}
+          >
             {children}
-          </main>
-        </SidebarProvider>
+          </Box>
+        </Box>
       </body>
     </html>
   )
