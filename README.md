@@ -49,6 +49,26 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Development
+
+### Prettier
+
+Run prettier write:
+
+```bash
+npm run format
+```
+
+Optionally you can run prettier check to verify code styling. This also runs during CI:
+
+```bash
+npx prettier . --check
+```
+
+### Type Checking and Code Quality
+
+ESLint and Typescript is enabled for this project.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
