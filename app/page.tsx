@@ -14,7 +14,7 @@ export default function Home() {
       <h1>Welcome to RxWriter</h1>
       <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
         <Grid container spacing={3}>
-          // TODO: upgrade to grid v2
+          {/*TODO: upgrade to grid v2 */}
           <Grid item xs={12} md={6}>
             <PrescriptionInputs
               prescriptionData={prescriptionData}
@@ -30,7 +30,7 @@ export default function Home() {
               Generate Prescription
             </Button>
           </Grid>
-          // TODO: upgrade to grid v2
+          {/*TODO: upgrade to grid v2 */}
           <Grid item xs={12} md={6}>
             {showGeneratedPrescription && (
               <div
