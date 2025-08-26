@@ -7,7 +7,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 Before you begin, make sure you have Node.js installed on your computer:
 
 1. **Install Node.js**: Download and install from [nodejs.org](https://nodejs.org/)
-
    - Choose the LTS (Long Term Support) version
    - This will also install npm (Node Package Manager)
 
@@ -21,7 +20,7 @@ Before you begin, make sure you have Node.js installed on your computer:
 
 Type these commands into the Terminal of your code editor like VS Code
 
-### 1. Clone the Repository 
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/pharmadevs-ca/rxwriter
