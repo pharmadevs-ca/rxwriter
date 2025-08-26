@@ -1,7 +1,7 @@
-'use client'
-import { Button } from '@mui/material'
+"use client";
+import { Button } from "@mui/material";
 
-export default function GeneratedPrescription(props) {
+export default function GeneratedPrescription() {
   return (
     <div>
       <h1>Generated Prescription</h1>
@@ -13,7 +13,7 @@ export default function GeneratedPrescription(props) {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
       </p>
 
-      <Button variant='contained'>Print</Button>
+      <Button variant="contained">Print</Button>
     </div>
-  )
+  );
 }
