@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Welcome to RxWriter</h1>
+      <h1>Welcome to RxWriter*****</h1>
       <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
