@@ -7,7 +7,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 Before you begin, make sure you have Node.js installed on your computer:
 
 1. **Install Node.js**: Download and install from [nodejs.org](https://nodejs.org/)
-
    - Choose the LTS (Long Term Support) version
    - This will also install npm (Node Package Manager)
 
@@ -21,7 +20,7 @@ Before you begin, make sure you have Node.js installed on your computer:
 
 Type these commands into the Terminal of your code editor like VS Code
 
-### 1. Clone the Repository 
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/pharmadevs-ca/rxwriter
@@ -49,6 +48,26 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the r
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Development
+
+### Prettier
+
+Run prettier write:
+
+```bash
+npm run format
+```
+
+Optionally you can run prettier check to verify code styling. This also runs during CI:
+
+```bash
+npx prettier . --check
+```
+
+### Type Checking and Code Quality
+
+ESLint and Typescript is enabled for this project.
 
 ## Learn More
 
