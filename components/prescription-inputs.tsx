@@ -1,5 +1,7 @@
 "use client";
 import { TextField } from "@mui/material";
+import { drugList } from "@/data/drugs";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 export default function PrescriptionInputs(props) {
   const { prescriptionData, setPrescriptionData } = props;
@@ -9,12 +11,26 @@ export default function PrescriptionInputs(props) {
   };
   return (
     <div className="flex flex-col gap-4">
-      <TextField
-        id="medicationName"
-        label="Medication Name"
-        variant="outlined"
-        onChange={handleChange}
-      />
+      <FormControl fullWidth>
+        <InputLabel id="medicationName-label">Medication Name</InputLabel>
+        <Select
+          labelId="medicationName-label"
+          id="medicationName"
+          value={prescriptionData?.medicationName || ""}
+          onChange={(e) =>
+            setPrescriptionData({
+              ...prescriptionData,
+              medicationName: e.target.value,
+            })
+          }
+        >
+          {drugList.map((drug, index) => (
+            <MenuItem key={index} value={drug.name}>
+              {drug.name} – {drug.strength} ({drug.form})
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
       <TextField
         id="dose"
