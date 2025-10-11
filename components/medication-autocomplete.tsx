@@ -23,6 +23,7 @@ import {
   InputLabel,
   Checkbox,
   FormControlLabel,
+  Button,
 } from "@mui/material";
 
 // Type definitions for Health Canada API responses
@@ -83,6 +84,9 @@ export default function MedicationAutocomplete({
   const [searchTerm, setSearchTerm] = useState(""); // User's search query
   const [strengthFilter, setStrengthFilter] = useState(""); // Optional filter for medication strength (e.g., "500")
   const [dosageFormFilter, setDosageFormFilter] = useState(""); // Optional filter for dosage form (e.g., "Tablet")
+  const [availableDosageForms, setAvailableDosageForms] = useState<string[]>(
+    [],
+  ); // Unique dosage forms from search results
   const [suggestions, setSuggestions] = useState<MedicationOption[]>([]); // All search results from API
   const [filteredSuggestions, setFilteredSuggestions] = useState<
     MedicationOption[]
@@ -181,9 +185,9 @@ export default function MedicationAutocomplete({
 
       // FETCH ADDITIONAL DATA FOR EACH DRUG
       // For each drug code, fetch active ingredients and dosage forms
-      // Limit to 20 results to avoid overwhelming the API
+      // Limit to 100 results to avoid overwhelming the API
       const medicationPromises = Array.from(drugCodes)
-        .slice(0, 20)
+        .slice(0, 100)
         .map(async (drugCode) => {
           const drug = drugMap.get(drugCode);
           if (!drug) return null;
@@ -236,6 +240,17 @@ export default function MedicationAutocomplete({
       const validMedications = medications.filter(
         (med): med is MedicationOption => med !== null,
       );
+
+      // Extract unique dosage forms from results
+      const uniqueForms = Array.from(
+        new Set(
+          validMedications
+            .map((med) => med.dosageForm)
+            .filter((form) => form !== ""),
+        ),
+      ).sort();
+      setAvailableDosageForms(uniqueForms);
+
       setSuggestions(validMedications);
       applyFilters(validMedications); // Apply any active filters
     } catch (error) {
@@ -249,7 +264,7 @@ export default function MedicationAutocomplete({
 
   /**
    * Applies strength and dosage form filters to the medication suggestions
-   * Filters are case-insensitive partial matches
+   * Filters are case-insensitive exact matches
    */
   const applyFilters = (meds: MedicationOption[] = suggestions) => {
     let filtered = meds;
@@ -261,11 +276,9 @@ export default function MedicationAutocomplete({
       );
     }
 
-    // Filter by dosage form (e.g., "Tablet" matches "Tablet")
+    // Filter by dosage form (exact match)
     if (dosageFormFilter) {
-      filtered = filtered.filter((med) =>
-        med.dosageForm.toLowerCase().includes(dosageFormFilter.toLowerCase()),
-      );
+      filtered = filtered.filter((med) => med.dosageForm === dosageFormFilter);
     }
 
     setFilteredSuggestions(filtered);
@@ -320,21 +333,53 @@ export default function MedicationAutocomplete({
     }
   };
 
+  /**
+   * Resets all search and filter states
+   * Clears selected drug and search results
+   */
+  const handleReset = () => {
+    setSearchTerm("");
+    setStrengthFilter("");
+    setDosageFormFilter("");
+    setSuggestions([]);
+    setFilteredSuggestions([]);
+    setAvailableDosageForms([]);
+    setSelectedDrug(null);
+    setCustomDrugName("");
+    setCustomDose("");
+  };
+
   return (
     <Box sx={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 3 }}>
       {/* LEFT COLUMN: Search/Custom Entry Interface */}
       <Box>
         {/* Toggle between API search and custom entry */}
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={customMode}
-              onChange={(e) => handleCustomModeChange(e.target.checked)}
-            />
-          }
-          label="Custom Drug Entry"
-          sx={{ mb: 2 }}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mb: 2,
+          }}
+        >
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={customMode}
+                onChange={(e) => handleCustomModeChange(e.target.checked)}
+              />
+            }
+            label="Custom Drug Entry"
+          />
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={handleReset}
+            sx={{ ml: 2 }}
+          >
+            Reset
+          </Button>
+        </Box>
 
         {customMode ? (
           /* CUSTOM DRUG ENTRY MODE */
@@ -418,22 +463,35 @@ export default function MedicationAutocomplete({
                   <Select
                     value={dosageFormFilter}
                     onChange={(e) => {
-                      setDosageFormFilter(e.target.value);
-                      applyFilters();
+                      const newValue = e.target.value;
+                      setDosageFormFilter(newValue);
+                      // Need to use suggestions directly since state hasn't updated yet
+                      let filtered = suggestions;
+
+                      if (strengthFilter) {
+                        filtered = filtered.filter((med) =>
+                          med.strength
+                            .toLowerCase()
+                            .includes(strengthFilter.toLowerCase()),
+                        );
+                      }
+
+                      if (newValue) {
+                        filtered = filtered.filter(
+                          (med) => med.dosageForm === newValue,
+                        );
+                      }
+
+                      setFilteredSuggestions(filtered);
                     }}
                     label="Filter by Dosage Form"
                   >
                     <MenuItem value="">All Forms</MenuItem>
-                    <MenuItem value="Tablet">Tablet</MenuItem>
-                    <MenuItem value="Capsule">Capsule</MenuItem>
-                    <MenuItem value="Solution">Solution</MenuItem>
-                    <MenuItem value="Suspension">Suspension</MenuItem>
-                    <MenuItem value="Injection">Injection</MenuItem>
-                    <MenuItem value="Cream">Cream</MenuItem>
-                    <MenuItem value="Ointment">Ointment</MenuItem>
-                    <MenuItem value="Powder">Powder</MenuItem>
-                    <MenuItem value="Syrup">Syrup</MenuItem>
-                    <MenuItem value="Drops">Drops</MenuItem>
+                    {availableDosageForms.map((form) => (
+                      <MenuItem key={form} value={form}>
+                        {form}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Box>
