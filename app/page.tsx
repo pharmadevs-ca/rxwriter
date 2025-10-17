@@ -3,11 +3,16 @@ import { useState } from "react";
 import { Button, Grid } from "@mui/material";
 import PrescriptionInputs from "@/components/prescription-inputs";
 import GeneratedPrescription from "@/components/generated-prescription";
+import { PrescriptionData, PharmacistData } from "@/types/prescription";
 
 export default function Home() {
-  const [prescriptionData, setPrescriptionData] = useState();
-  const [showGeneratedPrescription, setShowGeneratedPrescription] =
-    useState(false);
+  const [allPrescriptions, setAllPrescriptions] = useState<PrescriptionData[]>(
+    [],
+  );
+  const [prescriptionData, setPrescriptionData] = useState<PrescriptionData>(
+    {},
+  );
+  const [pharmacistData, setPharmacistData] = useState<PharmacistData>({});
 
   return (
     <div>
@@ -18,29 +23,29 @@ export default function Home() {
             prescriptionData={prescriptionData}
             setPrescriptionData={setPrescriptionData}
           />
+
           <Button
             onClick={() => {
-              setShowGeneratedPrescription(!showGeneratedPrescription);
+              if (prescriptionData.medicationName) {
+                setAllPrescriptions([...allPrescriptions, prescriptionData]);
+                setPrescriptionData({});
+              }
             }}
-            variant="contained"
-            sx={{ mt: 2 }}
+            variant="outlined"
+            sx={{ mt: 2, ml: 2 }}
           >
-            Generate Prescription
+            Add Prescription
           </Button>
         </Grid>
-        <Grid size={{ xs: 12, md: 6 }}>
-          {showGeneratedPrescription && (
-            <div
-              style={{
-                maxWidth: "600px",
-                wordBreak: "break-word",
-                overflowWrap: "break-word",
-              }}
-            >
-              <GeneratedPrescription />
-            </div>
-          )}
-        </Grid>
+
+        {allPrescriptions.length > 0 && (
+          <Grid size={{ xs: 12 }}>
+            <GeneratedPrescription
+              allPrescriptions={allPrescriptions}
+              pharmacistData={pharmacistData}
+            />
+          </Grid>
+        )}
       </div>
     </div>
   );

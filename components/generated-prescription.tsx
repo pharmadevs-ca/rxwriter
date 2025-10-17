@@ -1,19 +1,45 @@
 "use client";
-import { Button } from "@mui/material";
+import { Box } from "@mui/material";
+import { PrescriptionData, PharmacistData } from "../types/prescription";
 
-export default function GeneratedPrescription() {
+interface GeneratedPrescriptionProps {
+  allPrescriptions: PrescriptionData[];
+  pharmacistData?: PharmacistData;
+}
+
+export default function GeneratedPrescription({
+  allPrescriptions,
+  pharmacistData,
+}: GeneratedPrescriptionProps) {
+  const displayPrescriptionField = (label: string, value: string) => {
+    if (value) {
+      return (
+        <p>
+          <strong>{label}:</strong> {value}
+        </p>
+      );
+    }
+  };
+
   return (
-    <div>
+    <Box sx={{ p: 2, border: "1px solid grey" }}>
       <h1>Generated Prescription</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-      </p>
+      {allPrescriptions?.map((prescription, index) => (
+        <div key={index}>
+          {allPrescriptions?.length > 1 && <h3>Prescription {index + 1} </h3>}
+          {displayPrescriptionField("Medication", prescription.medicationName)}
+          {displayPrescriptionField("Dose", prescription.dose)}
+          {displayPrescriptionField("Sig", prescription.sig)}
+          {displayPrescriptionField("Mitte", prescription.mitte)}
 
-      <Button variant="contained">Print</Button>
-    </div>
+          {displayPrescriptionField("Refills", prescription.refills)}
+          <hr />
+        </div>
+      ))}
+      <div>
+        {displayPrescriptionField("Pharmacist", pharmacistData?.pharmacistName)}
+        {displayPrescriptionField("License #", pharmacistData?.licenseNumber)}
+      </div>
+    </Box>
   );
 }
