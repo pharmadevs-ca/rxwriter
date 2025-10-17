@@ -22,6 +22,8 @@ export default function Home() {
           <PrescriptionInputs
             prescriptionData={prescriptionData}
             setPrescriptionData={setPrescriptionData}
+            setPharmacistData={setPharmacistData}
+            pharmacistData={pharmacistData}
           />
 
           <Button

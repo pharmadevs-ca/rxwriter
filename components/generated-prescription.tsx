@@ -15,7 +15,7 @@ export default function GeneratedPrescription({
     if (value) {
       return (
         <p>
-          <strong>{label}:</strong> {value}
+          {label}: {value}
         </p>
       );
     }
@@ -23,10 +23,12 @@ export default function GeneratedPrescription({
 
   return (
     <Box sx={{ p: 2, border: "1px solid grey" }}>
-      <h1>Generated Prescription</h1>
       {allPrescriptions?.map((prescription, index) => (
         <div key={index}>
-          {allPrescriptions?.length > 1 && <h3>Prescription {index + 1} </h3>}
+          <h3>
+            <strong>Prescription {index + 1} </strong>
+          </h3>
+
           {displayPrescriptionField("Medication", prescription.medicationName)}
           {displayPrescriptionField("Dose", prescription.dose)}
           {displayPrescriptionField("Sig", prescription.sig)}
@@ -36,7 +38,7 @@ export default function GeneratedPrescription({
           <hr />
         </div>
       ))}
-      <div>
+      <div style={{ marginTop: "20px" }}>
         {displayPrescriptionField("Pharmacist", pharmacistData?.pharmacistName)}
         {displayPrescriptionField("License #", pharmacistData?.licenseNumber)}
       </div>
