@@ -1,5 +1,5 @@
 "use client";
-import { Box } from "@mui/material";
+import { Paper } from "@mui/material";
 import { PrescriptionData, PharmacistData } from "../types/prescription";
 
 interface GeneratedPrescriptionProps {
@@ -22,7 +22,16 @@ export default function GeneratedPrescription({
   };
 
   return (
-    <Box sx={{ p: 2, border: "1px solid grey" }}>
+    <Paper
+      elevation={1}
+      sx={{
+        p: 3,
+        border: "1px solid",
+        borderColor: "grey.300",
+        borderRadius: 2,
+        lineHeight: 1.3,
+      }}
+    >
       {allPrescriptions?.map((prescription, index) => (
         <div key={index}>
           <h3>
@@ -42,6 +51,6 @@ export default function GeneratedPrescription({
         {displayPrescriptionField("Pharmacist", pharmacistData?.pharmacistName)}
         {displayPrescriptionField("License #", pharmacistData?.licenseNumber)}
       </div>
-    </Box>
+    </Paper>
   );
 }
