@@ -15,9 +15,14 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import MedicationAutocomplete from "./medication-autocomplete";
+import { PrescriptionData, PharmacistData } from "../types/prescription";
 
-export default function PrescriptionInputs(props) {
-  const { prescriptionData, setPrescriptionData } = props;
+interface PrescriptionInputsProps {
+  prescriptionData: PrescriptionData;
+  setPrescriptionData: (data: PrescriptionData) => void;
+  setPharmacistData: (data: PharmacistData) => void;
+  pharmacistData: PharmacistData;
+}
 
   // Track whether user is in custom drug entry mode
   // When true, show the dose field; when false, dose comes from selected medication
@@ -42,6 +47,18 @@ export default function PrescriptionInputs(props) {
       dose: medication.strength,
       dosageForm: medication.dosageForm,
     });
+export default function PrescriptionInputs({
+  prescriptionData,
+  setPrescriptionData,
+  setPharmacistData,
+  pharmacistData,
+}: PrescriptionInputsProps) {
+  const handlePrescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrescriptionData({ ...prescriptionData, [e.target.id]: e.target.value });
+  };
+
+  const handlePharmacistChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPharmacistData({ ...pharmacistData, [e.target.id]: e.target.value });
   };
 
   return (
@@ -66,10 +83,26 @@ export default function PrescriptionInputs(props) {
 
       {/* Sig (Signatura) - dosing instructions for the patient */}
       <TextField
+        id="medicationName"
+        label="Medication Name"
+        variant="outlined"
+        value={prescriptionData.medicationName || ""}
+        onChange={handlePrescriptionChange}
+      />
+
+      <TextField
+        id="dose"
+        label="Dose"
+        variant="outlined"
+        value={prescriptionData.dose || ""}
+        onChange={handlePrescriptionChange}
+      />
+      <TextField
         id="sig"
         label="Sig"
         variant="outlined"
-        onChange={handleChange}
+        value={prescriptionData.sig || ""}
+        onChange={handlePrescriptionChange}
       />
 
       {/* Mitte - quantity to dispense */}
@@ -77,7 +110,8 @@ export default function PrescriptionInputs(props) {
         id="mitte"
         label="Mitte"
         variant="outlined"
-        onChange={handleChange}
+        value={prescriptionData.mitte || ""}
+        onChange={handlePrescriptionChange}
       />
 
       {/* Number of refills allowed */}
@@ -85,7 +119,8 @@ export default function PrescriptionInputs(props) {
         id="refills"
         label="Refills"
         variant="outlined"
-        onChange={handleChange}
+        value={prescriptionData.refills || ""}
+        onChange={handlePrescriptionChange}
       />
 
       <br />
@@ -95,13 +130,15 @@ export default function PrescriptionInputs(props) {
         id="pharmacistName"
         label="Name"
         variant="outlined"
-        onChange={handleChange}
+        value={pharmacistData.pharmacistName || ""}
+        onChange={handlePharmacistChange}
       />
       <TextField
         id="licenseNumber"
         label="License Number"
         variant="outlined"
-        onChange={handleChange}
+        value={pharmacistData.licenseNumber || ""}
+        onChange={handlePharmacistChange}
       />
     </div>
   );
