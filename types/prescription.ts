@@ -4,6 +4,7 @@ export interface PrescriptionData {
   sig?: string;
   mitte?: string;
   refills?: string;
+  dosageForm?: string;
 }
 
 export interface PharmacistData {
