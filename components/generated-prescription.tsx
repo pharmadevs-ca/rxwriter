@@ -1,5 +1,5 @@
 "use client";
-import { Paper } from "@mui/material";
+import { Box, Paper, Divider, Stack, Typography, Chip } from "@mui/material";
 import { PrescriptionData, PharmacistData } from "../types/prescription";
 
 interface GeneratedPrescriptionProps {
@@ -26,12 +26,28 @@ export default function GeneratedPrescription({
       elevation={1}
       sx={{
         p: 3,
+        m: 3,
         border: "1px solid",
         borderColor: "grey.300",
         borderRadius: 2,
         lineHeight: 1.3,
       }}
     >
+      {/* ---- Rx header with chip ---- */}
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ mb: 2 }}
+      >
+        <Stack direction="row" alignItems="center" spacing={1.5}>
+          <Chip label="Rx" color="gray" size="small" />
+          <Typography variant="h6" fontWeight={700}>
+            Prescription
+          </Typography>
+        </Stack>
+      </Stack>
+      <Divider sx={{ mb: 2 }} />
       {allPrescriptions?.map((prescription, index) => (
         <div key={index}>
           <h3>
@@ -42,15 +58,12 @@ export default function GeneratedPrescription({
           {displayPrescriptionField("Dose", prescription.dose)}
           {displayPrescriptionField("Sig", prescription.sig)}
           {displayPrescriptionField("Mitte", prescription.mitte)}
-
           {displayPrescriptionField("Refills", prescription.refills)}
-          <hr />
         </div>
       ))}
-      <div style={{ marginTop: "20px" }}>
-        {displayPrescriptionField("Pharmacist", pharmacistData?.pharmacistName)}
-        {displayPrescriptionField("License #", pharmacistData?.licenseNumber)}
-      </div>
+      <Divider sx={{ m: 2 }} />
+      {displayPrescriptionField("Pharmacist", pharmacistData?.pharmacistName)}
+      {displayPrescriptionField("License #", pharmacistData?.licenseNumber)}
     </Paper>
   );
 }
